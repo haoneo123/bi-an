@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墨鉴 - 官方导航与安全访问</title>
+    <style>
+        :root {
+            --primary-yellow: #fcd535;
+            --bg-dark: #0b0e11;
+            --card-bg: #1e2329;
+            --text-gray: #848e9c;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: #eaecef;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            margin: 0; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .container { width: 100%; max-width: 500px; text-align: center; }
+        
+        /* 头部个人信息 */
+        .profile { margin: 40px 0 30px; }
+        .avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-yellow); }
+        h1 { font-size: 22px; margin: 15px 0 5px; }
+        .sub-text { color: var(--text-gray); font-size: 14px; }
+
+        /* 核心按钮 */
+        .btn {
+            display: flex; align-items: center; justify-content: center;
+            background: var(--card-bg);
+            padding: 16px; margin: 15px 0;
+            border-radius: 12px;
+            text-decoration: none; color: white;
+            font-weight: bold; transition: 0.3s;
+            border: 1px solid #333;
+        }
+        .btn:hover { border-color: var(--primary-yellow); transform: translateY(-2px); }
+        .btn-yt { background: #FF0000; border: none; } /* YouTube 红色 */
+        .btn-binance { background: var(--primary-yellow); color: #000; border: none; }
+
+        /* 动态视频区域 */
+        #video-section { margin-top: 40px; text-align: left; width: 100%; }
+        .section-title { font-size: 16px; margin-bottom: 15px; color: var(--primary-yellow); font-weight: bold; }
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 8px; overflow: hidden;
+            margin-bottom: 15px; display: flex;
+            text-decoration: none; color: white;
+        }
+        .video-card img { width: 120px; height: 68px; object-fit: cover; }
+        .video-info { padding: 8px 12px; font-size: 13px; display: flex; align-items: center; }
+        
+        .loading { text-align: center; color: var(--text-gray); font-size: 12px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="profile">
+        <img src="https://www.gstatic.com/youtube/img/branding/favicon/favicon_144x144.png" alt="墨鉴" class="avatar">
+        <h1>墨鉴</h1>
+        <p class="sub-text">专注加密货币深度分析 | 官方访问工具</p>
+    </div>
+
+    <a href="https://www.youtube.com/@mojian" target="_blank" class="btn btn-yt">
+        🎥 订阅我的 YouTube 频道
+    </a>
+
+    <a href="./check.html" class="btn btn-binance">
+        🚀 立即安全访问币安 (免翻墙)
+    </a>
+
+
+
+    <p style="margin-top: 50px; font-size: 11px; color: var(--text-gray);">
+        © 2025 墨鉴 | 仅供学习与研究使用
+    </p>
+</div>
+
+
+
+</body>
+</html>
