@@ -1,5 +1,11 @@
-# 币安国内免翻墙网址
-可下载到本地，直接运行。
+[# 币安国内免翻墙网址
+可下载index.html到本地，直接运行。
+也可访问下面的域名直接访问
+
+https://bian.373120.best/
+
 网页打开后不要直接登录账户
+
 https://www.binance.com/zh-TC/official-verification
+
 先进入币安官方网站，验证网址是否为官方链接，确认后在登录。
