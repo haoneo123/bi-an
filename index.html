@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>币安官方安全访问导航</title>
+    <style>
+        body, html { height: 100%; margin: 0; display: flex; justify-content: center; align-items: center; background-color: #f0f0f0; font-family: sans-serif; }
+        .container { text-align: center; }
+        .loader { position: relative; width: 48px; height: 48px; margin: 0 auto 20px; }
+        /* 简单的纯 CSS 加载动画，不依赖外部图片 */
+        .loader-spin {
+            width: 100%; height: 100%;
+            border: 4px solid #e0e0e0;
+            border-top: 4px solid #fcd535;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
+        .text { color: #666; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loader"><div class="loader-spin"></div></div>
+        <div class="text">正在探测最快安全连接...</div>
+    </div>
+
+    <script>
+    (() => {
+        // 1. 自定义目标域名列表 (您可以随时增加)
+        const domains = [
+            'binance.com',
+            'binance.me',
+            'binance.info',
+            'bn66.com',
+            'maxweb.chat',
+            'maxweb.systems'
+        ].map(d => `https://www.${d}`);
+
+        // 2. 自定义您的推荐 ID (替换为您的，或者保持空)
+        const MY_REF_ID = 'GRO_28502_2TLTP'; 
+
+        // 3. 处理跳转路径逻辑
+        const getTargetPath = () => {
+            const params = new URLSearchParams(location.search);
+            // 简单逻辑：如果是本地运行，默认跳到注册页
+            return `/zh-CN/join?ref=${MY_REF_ID}`;
+        };
+
+        // 4. 探测函数
+        const checkUrl = (url) => {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 3500);
+            return fetch(url, { method: 'GET', mode: 'no-cors', signal: controller.signal })
+                .then(() => { clearTimeout(timeout); return url; })
+                .catch(() => Promise.reject());
+        };
+
+        // 执行并行探测
+        Promise.any(domains.map(checkUrl))
+            .then(bestUrl => {
+                const finalUrl = new URL(getTargetPath(), bestUrl).href;
+                console.log("跳转至:", finalUrl);
+                location.href = finalUrl;
+            })
+            .catch(() => {
+                // 如果全部失败，3秒后重试
+                console.error("所有域名暂时无法连接，请检查网络");
+                setTimeout(() => location.reload(), 3000);
+            });
+    })();
+    </script>
+</body>
+</html>
