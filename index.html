@@ -3,87 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>墨鉴 - 官方导航与安全访问</title>
+    <title>墨鉴 | 官方加密研究导航</title>
     <style>
         :root {
             --primary-yellow: #fcd535;
-            --bg-dark: #0b0e11;
-            --card-bg: #1e2329;
-            --text-gray: #848e9c;
+            --bg-black: #080808;
+            --card-bg: rgba(30, 35, 41, 0.7);
+            --text-main: #eaecef;
+            --text-dim: #848e9c;
+            --glow: rgba(252, 213, 53, 0.2);
         }
+
+        * { box-sizing: border-box; }
+
         body {
-            background-color: var(--bg-dark);
-            color: #eaecef;
-            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-            margin: 0; padding: 20px;
-            display: flex; flex-direction: column; align-items: center;
+            background-color: var(--bg-black);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(252, 213, 53, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(252, 213, 53, 0.05) 0%, transparent 20%);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-        .container { width: 100%; max-width: 500px; text-align: center; }
-        
-        /* 头部个人信息 */
-        .profile { margin: 40px 0 30px; }
-        .avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-yellow); }
-        h1 { font-size: 22px; margin: 15px 0 5px; }
-        .sub-text { color: var(--text-gray); font-size: 14px; }
 
-        /* 核心按钮 */
+        .container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 头像动效 */
+        .profile { margin-bottom: 35px; }
+        .avatar-wrapper {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 15px;
+        }
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--primary-yellow);
+            padding: 4px;
+            background: var(--bg-black);
+            object-fit: cover;
+        }
+        .avatar-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-yellow);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            70% { transform: scale(1.2); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        h1 { font-size: 24px; font-weight: 700; margin: 10px 0; letter-spacing: 1px; }
+        .sub-text { color: var(--text-dim); font-size: 14px; margin-bottom: 0; }
+
+        /* 按钮重构 */
+        .link-group { margin-top: 30px; }
+        
         .btn {
-            display: flex; align-items: center; justify-content: center;
-            background: var(--card-bg);
-            padding: 16px; margin: 15px 0;
-            border-radius: 12px;
-            text-decoration: none; color: white;
-            font-weight: bold; transition: 0.3s;
-            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .btn:hover { border-color: var(--primary-yellow); transform: translateY(-2px); }
-        .btn-yt { background: #FF0000; border: none; } /* YouTube 红色 */
-        .btn-binance { background: var(--primary-yellow); color: #000; border: none; }
 
-        /* 动态视频区域 */
-        #video-section { margin-top: 40px; text-align: left; width: 100%; }
-        .section-title { font-size: 16px; margin-bottom: 15px; color: var(--primary-yellow); font-weight: bold; }
-        .video-card {
-            background: var(--card-bg);
-            border-radius: 8px; overflow: hidden;
-            margin-bottom: 15px; display: flex;
-            text-decoration: none; color: white;
+        /* YouTube 按钮: 纯粹红黑对比 */
+        .btn-yt {
+            background: #FF0000;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
         }
-        .video-card img { width: 120px; height: 68px; object-fit: cover; }
-        .video-info { padding: 8px 12px; font-size: 13px; display: flex; align-items: center; }
+
+        /* 币安按钮: 渐变金属感 */
+        .btn-binance {
+            background: linear-gradient(135deg, #fcd535 0%, #f0b90b 100%);
+            color: #000;
+            box-shadow: 0 4px 15px var(--glow);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn:active { transform: translateY(-1px); }
+
+        /* 底部设计 */
+        .footer {
+            margin-top: 40px;
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 0.5px;
+        }
         
-        .loading { text-align: center; color: var(--text-gray); font-size: 12px; }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(252, 213, 53, 0.1);
+            color: var(--primary-yellow);
+            border-radius: 4px;
+            font-size: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="profile">
-        <img src="https://www.gstatic.com/youtube/img/branding/favicon/favicon_144x144.png" alt="墨鉴" class="avatar">
-        <h1>墨鉴</h1>
-        <p class="sub-text">专注加密货币深度分析 | 官方访问工具</p>
+        <div class="avatar-wrapper">
+            <img src="https://www.gstatic.com/youtube/img/branding/favicon/favicon_144x144.png" alt="墨鉴" class="avatar">
+        </div>
+        <div class="badge">Verified Analyst</div>
+        <h1>墨 鉴</h1>
+        <p class="sub-text">发现价值 · 洞察趋势</p>
     </div>
 
-    <a href="https://www.youtube.com/@mojian" target="_blank" class="btn btn-yt">
-        🎥 订阅我的 YouTube 频道
-    </a>
+    <div class="link-group">
+        <a href="https://www.youtube.com/@mojian" target="_blank" class="btn btn-yt">
+            <span style="margin-right:8px;">▶</span> 订阅 YouTube 频道
+        </a>
 
-    <a href="./check.html" class="btn btn-binance">
-        🚀 立即安全访问币安 (免翻墙)——主
-    </a>
-    <a href="./check2.html" class="btn btn-binance">
-        🚀 立即安全访问币安 (免翻墙)——备
-    </a>
+        <a href="./check.html" class="btn btn-binance">
+            🔒 安全访问币安 (线路一)
+        </a>
+        
+        <a href="./check2.html" class="btn btn-binance">
+            🔒 安全访问币安 (线路二)
+        </a>
+    </div>
 
-
-
-
-    <p style="margin-top: 50px; font-size: 11px; color: var(--text-gray);">
-        © 2025 墨鉴 | 仅供学习与研究使用
-    </p>
+    <div class="footer">
+        <p>© 2025 MOJIAN RESEARCH</p>
+        <p style="opacity: 0.5;">加密投资具有风险，本站仅供学术交流</p>
+    </div>
 </div>
-
-
 
 </body>
 </html>
