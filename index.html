@@ -29,7 +29,6 @@
             position: relative;
         }
 
-        /* 动态流动背景 */
         .bg-glow {
             position: absolute;
             width: 100vw;
@@ -77,7 +76,7 @@
         .avatar {
             width: 100%;
             height: 100%;
-            border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%; /* 有机形状 */
+            border-radius: 35% 65% 65% 35% / 35% 35% 65% 65%;
             background: linear-gradient(45deg, var(--primary), var(--primary-dark));
             display: flex;
             align-items: center;
@@ -135,6 +134,13 @@
             box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1);
         }
 
+        /* 为计算器入口设计的特殊样式 */
+        .calc-btn {
+            background: rgba(192, 132, 252, 0.15); /* 使用 primary 色调的透明背景 */
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            color: var(--primary);
+        }
+
         .sub-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -166,7 +172,6 @@
             letter-spacing: 1px;
         }
 
-        /* 隐藏滚动条 */
         ::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -188,6 +193,11 @@
             <a href="https://www.youtube.com/@mojian" target="_blank" class="main-btn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                 YouTube 频道
+            </a>
+
+            <a href="./StopLoss.html" class="main-btn calc-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                仓位风险计算器
             </a>
 
             <div style="margin-top: 10px;">
